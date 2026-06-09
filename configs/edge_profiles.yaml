@@ -1,0 +1,38 @@
+# Named profiles for emulating constrained edge devices on a dev CPU.
+#
+# Knobs the code enforces in-process:
+#   threads     OpenCV thread count (cv2.setNumThreads) + OMP/OpenBLAS env.
+#               0 means use all cores (no throttle).
+#   input_size  square network input; smaller is faster and less accurate.
+#
+# cpus/memory describe the hardware envelope the profile imitates. They are not
+# enforced from Python; apply them at the OS level with taskset/cpulimit or
+# docker --cpus/--memory (see the README "Reproduce" section).
+
+unconstrained:
+  description: all cores, no throttle (dev CPU baseline)
+  threads: 0
+  input_size: 416
+  cpus: null
+  memory: null
+
+pi4b:
+  description: Raspberry Pi 4B 4GB envelope, 4x Cortex-A72
+  threads: 4
+  input_size: 416
+  cpus: 4
+  memory: 4g
+
+pi4b_320:
+  description: Pi 4B at 320 input, trades accuracy for FPS
+  threads: 4
+  input_size: 320
+  cpus: 4
+  memory: 4g
+
+edge_2core:
+  description: generic dual-core edge envelope, 2 threads at 256 input
+  threads: 2
+  input_size: 256
+  cpus: 2
+  memory: 2g
