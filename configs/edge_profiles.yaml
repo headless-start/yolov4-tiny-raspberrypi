@@ -7,7 +7,7 @@
 #
 # cpus/memory describe the hardware envelope the profile imitates. They are not
 # enforced from Python; apply them at the OS level with taskset/cpulimit or
-# docker --cpus/--memory (see the README "Reproduce" section).
+# docker --cpus/--memory (see the README "Run it" section).
 
 unconstrained:
   description: all cores, no throttle (dev CPU baseline)
